@@ -17,7 +17,7 @@ const Card = () => {
         image={catFirst}
         imageAlt="First Domain"
         description={`This is site in first domain`}
-        tags={["#first", "#domain"]}
+        tags={["#first", "#domain", "#ggg"]}
       />
     )
   }else if(window.location.host === 'localhost:8082'){
@@ -39,6 +39,12 @@ const Card = () => {
         description={`This is site in third domain`}
         tags={["#third", "#domain"]}
       />
+    )
+  }else{
+    return(
+      <>
+        <h1>Page not find!!</h1>
+      </>
     )
   }
 }

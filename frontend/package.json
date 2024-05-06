@@ -1,17 +1,17 @@
 {
   "name": "frontend",
-  "version": "4.0.0",
+  "version": "1.0.0",
+  "license": "MIT",
   "description": "React try run with three domains",
   "scripts": {
-    "dev1": "parcel serve src/index1.html -p 8081 --open",
-    "dev2": "parcel serve src/index2.html -p 8082 --open",
-    "dev3": "parcel serve src/index3.html -p 8083 --open",
-    "build1": "parcel build --dist-dir public/index1 src/index1.html",
-    "build2": "parcel build --dist-dir public/index2 src/index2.html",
-    "build3": "parcel build --dist-dir public/index3 src/index3.html",
+    "dev1": "parcel serve src/index.html -p 8081 --open",
+    "dev2": "parcel serve src/index.html -p 8082 --open",
+    "dev3": "parcel serve src/index.html -p 8083 --open",
+    "build": "parcel build --dist-dir public src/index.html",
     "clean": "rm -rf .parcel-cache dist",
-    "serve": "pnpx serve dist",
-    "start": "pnpm clean && pnpm build && pnpm serve"
+    "serve": "npx http-server -p 8080",
+    "start": "pnpm clean && pnpm build && pnpm serve",
+    "parcel-help": "parcel --help"
   },
   "devDependencies": {
     "@parcel/transformer-image": "2.12.0",

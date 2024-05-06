@@ -1,0 +1,92 @@
+version: '3.0'
+services:
+
+  rpe_frontend:
+    build: ./frontend
+    container_name: rpe_react_front
+    ports:
+      - '8081:8080'
+      - '8082:8080'
+      - '8083:8080'
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    restart: unless-stopped
+    command: ['yarn', 'start']
+    env_file:
+      - ./frontend/.env
+    networks:
+      - rpe_network
+    stdin_open: true
+    tty: true
+
+  # ccm_backend:
+  #   build: ./rails-api
+  #   container_name: ccm_rails_back
+  #   env_file:
+  #     - ./rails-api/env/development/ccm_back_db
+  #     - ./rails-api/env/development/ccm_backend
+  #     - ./rails-api/env/development/keycloac
+  #   ports:
+  #     - "3000:3000"
+  #   volumes:
+  #     - ./rails-api:/usr/src/app
+  #   depends_on:
+  #     - ccm_back_redis
+  #     - ccm_back_db
+  #   command: bundle exec rails s -p 3000 -b '0.0.0.0'
+  #   restart: unless-stopped
+  #   networks:
+  #     - ccm_network
+  #   stdin_open: true
+  #   tty: true
+
+  # ccm_back_redis:
+  #   image: redis:7.2
+  #   container_name: ccm_back_redis
+  #   command: redis-server
+  #   ports:
+  #     - "6379:6379"
+  #   restart: unless-stopped
+  #   volumes:
+  #     - redis_data:/var/lib/docker/volumes/center-credit-module_redis_data/_data
+  #   networks:
+  #     - ccm_network
+
+  # ccm_back_db:
+  #   image: postgres:16.2
+  #   container_name: ccm_back_db
+  #   env_file:
+  #     - ./rails-api/env/development/ccm_back_db
+  #   volumes:
+  #     - db_data:/var/lib/docker/volumes/center-credit-module_db_data/_data
+  #   restart: unless-stopped
+  #   networks:
+  #     - ccm_network
+
+  # keycloak:
+  #   image: quay.io/keycloak/keycloak:24.0.2
+  #   command: start-dev --http-relative-path '/auth'
+  #   env_file:
+  #     - .env.keycloak.development
+  #   ports:
+  #     - "8080:8080"
+  #   restart: unless-stopped
+  #   volumes:
+  #     - keycloak_data:/opt/jboss/keycloak/standalone/data
+  #     - keycloak_logs:/opt/jboss/keycloak/standalone/log
+  #   networks:
+  #     - ccm_network
+  #   stdin_open: true
+  #   tty: true
+
+
+# volumes:
+#   db_data:
+#   redis_data:
+#   keycloak_data:
+#   keycloak_logs:
+
+networks:
+  rpe_network:
+    driver: host
