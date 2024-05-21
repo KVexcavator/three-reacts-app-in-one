@@ -1,26 +1,30 @@
 import * as React from "react"
 import "../styles/main.pcss"
 import { BrowserRouter, Routes, Route} from 'react-router-dom'
-import CardFirst from "../components/Card/index1"
+import catFourth from "url:../../static/cat-3.jpg"
 import catFirst from "url:../../static/cat-1.jpg"
 import catSecond from "url:../../static/cat-2.jpg"
 import catThird from "url:../../static/cat-3.jpg"
+import CardFirst from "../components/Card/index1"
 import CardSecond from "../components/Card/index2"
 import CardThird from "../components/Card/index3"
+import CardFourth from "../components/Card/index4"
 
 function App() {
 const Card = () => {
-  if(window.location.host === 'localhost:8081'){
+  const location = window.location.host
+
+  if(location.includes('dtc.gold') || location ===  'localhost:8081'){
     return(
       <CardFirst
         title="First Domain"
         image={catFirst}
         imageAlt="First Domain"
-        description={`This is site in first domain`}
+        description={`This is site in firstaaa domain`}
         tags={["#first", "#domain", "#ggg"]}
       />
     )
-  }else if(window.location.host === 'localhost:8082'){
+  }else if(location.includes('slgroup') || location === 'localhost:8082'){
     return(
       <CardSecond
         title="Second Domain"
@@ -30,7 +34,7 @@ const Card = () => {
         tags={["#second", "#domain"]}
       />
     )
-  }else if(window.location.host === 'localhost:8083'){
+  }else if(location.includes('vproject') || location === 'localhost:8083'){
     return(
       <CardThird
         title="Third Domain"
@@ -40,11 +44,15 @@ const Card = () => {
         tags={["#third", "#domain"]}
       />
     )
-  }else{
+  }else if(location.includes('celingormash') || location === 'localhost:8084'){
     return(
-      <>
-        <h1>Page not find!!</h1>
-      </>
+      <CardFourth
+        title="Fourth Domain"
+        image={catFourth}
+        imageAlt="Fourth Domain"
+        description={`This is site in fourth domain`}
+        tags={["#fourth", "#domain"]}
+      />
     )
   }
 }
